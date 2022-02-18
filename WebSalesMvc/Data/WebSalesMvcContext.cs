@@ -13,7 +13,10 @@ namespace WebSalesMvc.Data
             : base(options)
         {
         }
+        //MINHAS ENTIDADES;
+        public DbSet<Department> Department { get; set; }
+        public DbSet<Seller> Seller { get; set; }
+        public DbSet<SalesRecord> SalesRecord { get; set; }
 
-        public DbSet<WebSalesMvc.Models.Department> Department { get; set; }
     }
 }
