@@ -21,6 +21,12 @@ namespace WebSalesMvc.Services
             return _context.Seller.ToList(); //Retorna do banco todos os vendedores, convertido para uma lista!
         }
 
+        public void Insert(Seller obj)
+        {
+            _context.Add(obj);
+            _context.SaveChanges();
+        }
+
 
     }
 }
