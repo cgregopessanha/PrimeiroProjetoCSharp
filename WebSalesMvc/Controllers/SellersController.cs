@@ -5,17 +5,20 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebSalesMvc.Models;
 using WebSalesMvc.Services;
+using WebSalesMvc.Models.ViewModels;
 
 namespace WebSalesMvc.Controllers
 {
     public class SellersController : Controller
     {
         private readonly SellerService _sellerService;
+        private readonly DepartmentService _departmentService;
 
         //INJEÇÃO DE DEPENDÊNCIA
-        public SellersController(SellerService sellerService)
+        public SellersController(SellerService sellerService, DepartmentService departmentService)
         {
             _sellerService = sellerService;
+            _departmentService = departmentService;
         }
 
         public IActionResult Index()
@@ -27,7 +30,9 @@ namespace WebSalesMvc.Controllers
 
         public IActionResult Create()
         {
-            return View();
+            var departments = _departmentService.FindAll(); //BUSCA NO bd TODOS OS DEPARTAMENTOS;
+            var viewModel = new SellerFormViewModel { Departments = departments }; //INICIO O CONSTRUTOR COM A LISTA DE DEPARTAMENTOS;
+            return View(viewModel); //mINHA VIEW RECEBE VIEWMODEL COM OS DEPARTAMENTOS POPULADOS;
         }
 
         [HttpPost]//Anotação Indicando que o método é post

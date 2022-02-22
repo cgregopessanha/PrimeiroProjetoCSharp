@@ -43,7 +43,9 @@ namespace WebSalesMvc
 
             services.AddScoped<SeedingService>(); //Registra o serviço no sistema de injeção de dependência da aplicação;
 
+            //REGISTRO DOS SERVICES NESTE SISTEMA DE INJEÇÃO DE DEPENDÊNCIAS;
             services.AddScoped<SellerService>();
+            services.AddScoped<DepartmentService>();
 
         }
 
