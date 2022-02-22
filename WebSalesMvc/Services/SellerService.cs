@@ -26,5 +26,18 @@ namespace WebSalesMvc.Services
             _context.Add(obj); //Adicionar no meu context o obj passado como argumento do método Insert;
             _context.SaveChanges();
         }
+
+        public Seller FindById(int id)
+        {
+            return _context.Seller.FirstOrDefault(obj => obj.Id == id); //Linq
+        }
+
+        public void Remove(int id)
+        {
+            var obj = _context.Seller.Find(id); //Procuro o id vindo do argumento;
+            _context.Seller.Remove(obj); //Removo do DbSet passando o obj
+            _context.SaveChanges(); //Entity framework efetiva no banco de dados;
+
+        }
     }
 }

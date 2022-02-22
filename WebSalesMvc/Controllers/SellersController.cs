@@ -35,12 +35,37 @@ namespace WebSalesMvc.Controllers
             return View(viewModel); //mINHA VIEW RECEBE VIEWMODEL COM OS DEPARTAMENTOS POPULADOS;
         }
 
+
         [HttpPost]//Anotação Indicando que o método é post
         [ValidateAntiForgeryToken] //Anotação de segurança para evitar injeção durante sessão de conexão.
         public IActionResult Create(Seller seller)
         {
             _sellerService.Insert(seller);
             return RedirectToAction(nameof(Index)); //Redirecionar para o index;
+        }
+        public IActionResult Delete(int? id)
+        {
+            //Testando se o id é null
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var obj = _sellerService.FindById(id.Value);
+            //testando se o obj existe
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            return View(obj); //Retorno a view, passando o obj como argumento;
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int id)
+        {
+            _sellerService.Remove(id);
+            return RedirectToAction(nameof(Index));
         }
     }
 }
