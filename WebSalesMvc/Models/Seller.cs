@@ -14,7 +14,8 @@ namespace WebSalesMvc.Models
 
         //ASSOCIAÇÕES
         public Department Department { get; set; }
-        public ICollection<SalesRecord> Sales { get; set; } = new List<SalesRecord>();
+        public int DepartmentId { get; set; } //Usado para atribuir um Id de departamento a um Seller;
+        public ICollection<SalesRecord> Sales { get; set; } = new List<SalesRecord>(); //Lista de vendas 
 
         public Seller()
         {
@@ -41,11 +42,7 @@ namespace WebSalesMvc.Models
 
         public double TotalSales(DateTime initial, DateTime final)
         {
-
-
             return Sales.Where(sr => sr.Date >= initial && sr.Date <= final).Sum(sr => sr.Amount);
         }
-
-
     }
 }

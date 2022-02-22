@@ -11,22 +11,21 @@ namespace WebSalesMvc.Services
     {
         private readonly WebSalesMvcContext _context; //DEPENDÊNCIA DO DBCONTEXT;
 
-        public SellerService (WebSalesMvcContext context)
+        public SellerService(WebSalesMvcContext context)
         {
             _context = context;
         }
 
         public List<Seller> FindAll()
         {
-            return _context.Seller.ToList(); //Retorna do banco todos os vendedores, convertido para uma lista!
+            return _context.Seller.ToList(); //Retorna do banco todos os vendedores, convertido para uma lista;
         }
 
         public void Insert(Seller obj)
         {
-            _context.Add(obj);
+            obj.Department = _context.Department.First(); //Provisoriamente atribuir o primeeiro departamento ao obj;
+            _context.Add(obj); //Adicionar no meu context o obj passado como argumento do método Insert;
             _context.SaveChanges();
         }
-
-
     }
 }
