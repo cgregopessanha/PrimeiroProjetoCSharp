@@ -1,0 +1,74 @@
+﻿@model WebSalesMvc.Models.Seller
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="">
+
+    <dl class="dl-horizontal">
+
+        <!--MOSTRA O NOME DO CAMPO-->
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <!--MOSTRA O VALOR DO CAMPO-->
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <!--MOSTRA O NOME DO CAMPO-->
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <!--MOSTRA O VALOR DO CAMPO-->
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <!--MOSTRA O NOME DO CAMPO-->
+        <dt>
+            @Html.DisplayNameFor(model => model.BirthDate)
+        </dt>
+
+        <!--MOSTRA O VALOR DO CAMPO-->
+        <dd>
+            @Html.DisplayFor(model => model.BirthDate)
+        </dd>
+
+        <!--MOSTRA O NOME DO CAMPO-->
+        <dt>
+            @Html.DisplayNameFor(model => model.BaseSalary)
+        </dt>
+
+        <!--MOSTRA O VALOR DO CAMPO-->
+        <dd>
+            @Html.DisplayFor(model => model.BaseSalary)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Department)
+        </dt>
+
+        <!--MOSTRA O VALOR DO CAMPO-->
+        <dd>
+            @Html.DisplayFor(model => model.Department.Name)
+        </dd>
+    </dl>
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-default">Edit</a>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+
+
+
+
+
