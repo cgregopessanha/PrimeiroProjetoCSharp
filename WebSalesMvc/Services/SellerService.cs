@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebSalesMvc.Data;
 using WebSalesMvc.Models;
+using WebSalesMvc.Services.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace WebSalesMvc.Services
@@ -38,6 +39,24 @@ namespace WebSalesMvc.Services
             var obj = _context.Seller.Find(id); //Procuro o id vindo do argumento;
             _context.Seller.Remove(obj); //Removo do DbSet passando o obj
             _context.SaveChanges(); //Entity framework efetiva no banco de dados;
+
+        }
+
+        public void Update(Seller obj)
+        {
+            if (!_context.Seller.Any(x => x.Id == obj.Id))
+            {
+                throw new NotFoundException("Id Not Found!");
+            }
+            try
+            {
+                _context.Update(obj);
+                _context.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException e)
+            {
+                throw new DbConcurrencyException(e.Message);
+            }
 
         }
     }
