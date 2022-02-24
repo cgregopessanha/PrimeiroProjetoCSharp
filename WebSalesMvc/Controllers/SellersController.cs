@@ -42,6 +42,14 @@ namespace WebSalesMvc.Controllers
         [ValidateAntiForgeryToken] //Anotação de segurança para evitar injeção durante sessão de conexão.
         public IActionResult Create(Seller seller)
         {
+            /*Esse if é para, caso o JavaScript esteja desabilitado, o APP não aceitar gravações em branco*/
+            if (!ModelState.IsValid)
+            {
+                var departments = _departmentService.FindAll();
+                var viewModel = new SellerFormViewModel { Seller = seller, Departments = departments };
+                return View(viewModel);
+            }
+
             _sellerService.Insert(seller);
             return RedirectToAction(nameof(Index)); //Redirecionar para o index;
         }
@@ -108,6 +116,14 @@ namespace WebSalesMvc.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, Seller seller)
         {
+            /*Esse if é para, caso o JavaScript esteja desabilitado, o APP não aceitar gravações em branco*/
+            if (!ModelState.IsValid)
+            {
+                var departments = _departmentService.FindAll();
+                var viewModel = new SellerFormViewModel { Seller = seller, Departments = departments };
+                return View(viewModel);
+            }
+
             if (id != seller.Id)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id Mismatch!" });
