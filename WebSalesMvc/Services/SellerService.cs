@@ -36,10 +36,16 @@ namespace WebSalesMvc.Services
 
         public async Task RemoveAsync(int id)
         {
-            var obj = await _context.Seller.FindAsync(id); //Procuro o id vindo do argumento;
-            _context.Seller.Remove(obj); //Removo do DbSet passando o obj
-            _context.SaveChanges(); //Entity framework efetiva no banco de dados;
-
+            try
+            {
+                var obj = await _context.Seller.FindAsync(id); //Procuro o id vindo do argumento;
+                _context.Seller.Remove(obj); //Removo do DbSet passando o obj
+                _context.SaveChanges(); //Entity framework efetiva no banco de dados;
+            }
+            catch (DbUpdateException e)
+            {
+                throw new IntegrityException("Can not delete this Seller bacause He/She has sales.");
+            }
         }
 
         public async Task UpdateAsync(Seller obj)
